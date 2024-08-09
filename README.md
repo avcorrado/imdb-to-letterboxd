@@ -9,7 +9,7 @@ This Firefox extension enhances the IMDb experience by scraping the Letterboxd r
 
 ## Installation
 
-You can download the extension from the [Firefox Add-ons store](https://addons.mozilla.org/firefox/addon/imdb-to-letterboxd/).
+You can download the extension from the [Firefox Add-ons store](https://addons.mozilla.org/firefox/addon/imdb-to-letterboxd-rating/).
 
 ## Permissions
 
