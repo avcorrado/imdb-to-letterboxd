@@ -30,14 +30,16 @@ async function insertLetterboxdScore() {
 
     if (aggregateRatingElement) {
       const lbxRatingWrapper = document.createElement('div');
-      lbxRatingWrapper.className = 'iaJqqu rating-bar__base-button';
+      lbxRatingWrapper.className =
+        'sc-acdbf0f3-0 iaJqqu rating-bar__base-button';
 
       const lbxTextElement = document.createElement('div');
-      lbxTextElement.className = 'ioCFan';
+      lbxTextElement.className = 'sc-acdbf0f3-1 ioCFan';
       lbxTextElement.textContent = 'Letterboxd RATING';
 
       const lbxRatingElement = document.createElement('a');
-      lbxRatingElement.className = 'ipc-btn';
+      lbxRatingElement.className =
+        'ipc-btn ipc-btn--single-padding ipc-btn--center-align-content ipc-btn--default-height ipc-btn--core-baseAlt ipc-btn--theme-baseAlt ipc-btn--on-textPrimary ipc-text-button sc-acdbf0f3-2 brjkFP';
       lbxRatingElement.setAttribute('role', 'button');
       lbxRatingElement.setAttribute('tabindex', '0');
       lbxRatingElement.setAttribute('aria-label', 'View Letterboxd Ratings');
@@ -51,10 +53,10 @@ async function insertLetterboxdScore() {
       lbxRatingTextWrapper.className = 'ipc-btn__text';
 
       const lbxRatingInnerWrapper = document.createElement('div');
-      lbxRatingInnerWrapper.className = 'fRlpFA';
+      lbxRatingInnerWrapper.className = 'sc-acdbf0f3-3 fRlpFA';
 
       const lbxLogoWrapper = document.createElement('div');
-      lbxLogoWrapper.className = 'hJNcKz';
+      lbxLogoWrapper.className = 'sc-acdbf0f3-4 hJNcKz';
       const lbxLogoElement = document.createElement('img');
       lbxLogoElement.src = browser.runtime.getURL(
         'icons/letterboxd-decal-dots-pos-rgb.svg'
@@ -67,14 +69,14 @@ async function insertLetterboxdScore() {
       lbxLogoWrapper.appendChild(lbxLogoElement);
 
       const lbxScoreElement = document.createElement('div');
-      lbxScoreElement.className = 'ghvwpw';
+      lbxScoreElement.className = 'sc-eb51e184-0 ghvwpw';
 
       const letterboxdScore = await fetchLetterboxdScore(imdbId);
       if (letterboxdScore) {
-        lbxScoreElement.innerHTML = `<div class="fAhXAe"><span class="ljxVSS">${letterboxdScore}</span><span>/5</span></div><div class="gDGqZp"></div>`;
+        lbxScoreElement.innerHTML = `<div class="sc-eb51e184-2 fAhXAe"><span class="sc-eb51e184-1 ljxVSS">${letterboxdScore}</span><span>/5</span></div><div class="sc-eb51e184-5 gDGqZp"></div>`;
       } else {
         lbxScoreElement.innerHTML =
-          '<div class="fAhXAe"><span class="ljxVSS">N/A</span><span>/5</span></div><div class="gDGqZp"></div><div class="kgbSIj">N/A</div>';
+          '<div class="sc-eb51e184-2 fAhXAe"><span class="sc-eb51e184-1 ljxVSS">N/A</span><span>/5</span></div><div class="sc-eb51e184-5 gDGqZp"></div><div class="sc-eb51e184-3 kgbSIj">N/A</div>';
       }
 
       lbxRatingInnerWrapper.appendChild(lbxLogoWrapper);
