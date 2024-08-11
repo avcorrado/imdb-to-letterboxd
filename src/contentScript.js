@@ -5,8 +5,8 @@ async function fetchLetterboxdScore(imdbId) {
     const text = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'text/html');
-
     const averageRatingMeta = doc.querySelector('meta[name="twitter:data2"]');
+
     if (averageRatingMeta) {
       const rating = averageRatingMeta.getAttribute('content');
       const numericRating = parseFloat(rating.split(' ')[0]);
@@ -19,9 +19,62 @@ async function fetchLetterboxdScore(imdbId) {
   }
 }
 
+function createRatingWrapper() {
+  const lbxRatingWrapper = document.createElement('div');
+  lbxRatingWrapper.className = 'lbx-rating-wrapper';
+  return lbxRatingWrapper;
+}
+
+function createTextElement() {
+  const lbxTextElement = document.createElement('div');
+  lbxTextElement.className = 'lbx-text-element';
+  lbxTextElement.textContent = 'Letterboxd RATING';
+  return lbxTextElement;
+}
+
+function createRatingElement(imdbId) {
+  const lbxRatingElement = document.createElement('a');
+  lbxRatingElement.className = 'lbx-rating-element';
+  lbxRatingElement.setAttribute('role', 'button');
+  lbxRatingElement.setAttribute('tabindex', '0');
+  lbxRatingElement.setAttribute('aria-label', 'View Letterboxd Ratings');
+  lbxRatingElement.setAttribute('aria-disabled', 'false');
+  lbxRatingElement.href = `https://letterboxd.com/imdb/${imdbId}/`;
+  return lbxRatingElement;
+}
+
+function createLogoElement() {
+  const lbxLogoWrapper = document.createElement('div');
+  lbxLogoWrapper.className = 'lbx-logo-wrapper';
+
+  const lbxLogoElement = document.createElement('img');
+  lbxLogoElement.src = browser.runtime.getURL(
+    'icons/letterboxd-decal-dots-pos-rgb.svg'
+  );
+  lbxLogoElement.alt = 'Letterboxd Logo';
+  lbxLogoElement.width = 24;
+  lbxLogoElement.height = 24;
+
+  lbxLogoWrapper.appendChild(lbxLogoElement);
+  return lbxLogoWrapper;
+}
+
+function createScoreElement(score) {
+  const lbxScoreElement = document.createElement('div');
+  lbxScoreElement.className = 'lbx-score-element';
+
+  const scoreText = score
+    ? `<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">${score}</span><span>/5</span></div><div class="gDGqZp"></div>`
+    : '<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">N/A</span><span>/5</span></div><div class="gDGqZp"></div><div class="kgbSIj">N/A</div>';
+
+  lbxScoreElement.innerHTML = scoreText;
+  return lbxScoreElement;
+}
+
 async function insertLetterboxdScore() {
   const imdbUrl = window.location.href;
   const imdbIdMatch = imdbUrl.match(/\/title\/(tt\d+)\//);
+
   if (imdbIdMatch) {
     const imdbId = imdbIdMatch[1];
     const aggregateRatingElement = document.querySelector(
@@ -29,59 +82,19 @@ async function insertLetterboxdScore() {
     );
 
     if (aggregateRatingElement) {
-      const lbxRatingWrapper = document.createElement('div');
-      lbxRatingWrapper.className = 'lbx-rating-wrapper';
-
-      const lbxTextElement = document.createElement('div');
-
-      lbxTextElement.className = 'lbx-text-element';
-      lbxTextElement.textContent = 'Letterboxd RATING';
-
-      const lbxRatingElement = document.createElement('a');
-      lbxRatingElement.className = 'lbx-rating-element';
-
-      lbxRatingElement.setAttribute('role', 'button');
-      lbxRatingElement.setAttribute('tabindex', '0');
-      lbxRatingElement.setAttribute('aria-label', 'View Letterboxd Ratings');
-      lbxRatingElement.setAttribute('aria-disabled', 'false');
-      lbxRatingElement.setAttribute(
-        'href',
-        `https://letterboxd.com/imdb/${imdbId}/`
-      );
-
-      const lbxRatingTextWrapper = document.createElement('span');
-      lbxRatingTextWrapper.className = 'lbx-rating-text-wrapper';
-
+      const lbxRatingWrapper = createRatingWrapper();
+      const lbxTextElement = createTextElement();
+      const lbxRatingElement = createRatingElement(imdbId);
       const lbxRatingInnerWrapper = document.createElement('div');
       lbxRatingInnerWrapper.className = 'lbx-rating-inner-wrapper';
 
-      const lbxLogoWrapper = document.createElement('div');
-      lbxLogoWrapper.className = 'lbx-logo-wrapper';
-      const lbxLogoElement = document.createElement('img');
-      lbxLogoElement.src = browser.runtime.getURL(
-        'icons/letterboxd-decal-dots-pos-rgb.svg'
-      );
-      lbxLogoElement.alt = 'Letterboxd Logo';
-      lbxLogoElement.width = 24;
-      lbxLogoElement.height = 24;
-
-      lbxLogoWrapper.appendChild(lbxLogoElement);
-
-      const lbxScoreElement = document.createElement('div');
-      lbxScoreElement.className = 'lbx-score-element';
-
+      const lbxLogoWrapper = createLogoElement();
       const letterboxdScore = await fetchLetterboxdScore(imdbId);
-      if (letterboxdScore) {
-        lbxScoreElement.innerHTML = `<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">${letterboxdScore}</span><span>/5</span></div><div class="gDGqZp"></div>`;
-      } else {
-        lbxScoreElement.innerHTML =
-          '<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">N/A</span><span>/5</span></div><div class="gDGqZp"></div><div class="kgbSIj">N/A</div>';
-      }
+      const lbxScoreElement = createScoreElement(letterboxdScore);
 
       lbxRatingInnerWrapper.appendChild(lbxLogoWrapper);
       lbxRatingInnerWrapper.appendChild(lbxScoreElement);
-      lbxRatingTextWrapper.appendChild(lbxRatingInnerWrapper);
-      lbxRatingElement.appendChild(lbxRatingTextWrapper);
+      lbxRatingElement.appendChild(lbxRatingInnerWrapper);
       lbxRatingWrapper.appendChild(lbxTextElement);
       lbxRatingWrapper.appendChild(lbxRatingElement);
 
