@@ -30,16 +30,16 @@ async function insertLetterboxdScore() {
 
     if (aggregateRatingElement) {
       const lbxRatingWrapper = document.createElement('div');
-      lbxRatingWrapper.className =
-        'sc-acdbf0f3-0 iaJqqu rating-bar__base-button';
+      lbxRatingWrapper.className = 'lbx-rating-wrapper';
 
       const lbxTextElement = document.createElement('div');
-      lbxTextElement.className = 'sc-acdbf0f3-1 ioCFan';
+
+      lbxTextElement.className = 'lbx-text-element';
       lbxTextElement.textContent = 'Letterboxd RATING';
 
       const lbxRatingElement = document.createElement('a');
-      lbxRatingElement.className =
-        'ipc-btn ipc-btn--single-padding ipc-btn--center-align-content ipc-btn--default-height ipc-btn--core-baseAlt ipc-btn--theme-baseAlt ipc-btn--on-textPrimary ipc-text-button sc-acdbf0f3-2 brjkFP';
+      lbxRatingElement.className = 'lbx-rating-element';
+
       lbxRatingElement.setAttribute('role', 'button');
       lbxRatingElement.setAttribute('tabindex', '0');
       lbxRatingElement.setAttribute('aria-label', 'View Letterboxd Ratings');
@@ -50,13 +50,13 @@ async function insertLetterboxdScore() {
       );
 
       const lbxRatingTextWrapper = document.createElement('span');
-      lbxRatingTextWrapper.className = 'ipc-btn__text';
+      lbxRatingTextWrapper.className = 'lbxRatingTextWrapper';
 
       const lbxRatingInnerWrapper = document.createElement('div');
-      lbxRatingInnerWrapper.className = 'sc-acdbf0f3-3 fRlpFA';
+      lbxRatingInnerWrapper.className = 'lbxRatingInnerWrapper';
 
       const lbxLogoWrapper = document.createElement('div');
-      lbxLogoWrapper.className = 'sc-acdbf0f3-4 hJNcKz';
+      lbxLogoWrapper.className = 'lbxLogoWrapper';
       const lbxLogoElement = document.createElement('img');
       lbxLogoElement.src = browser.runtime.getURL(
         'icons/letterboxd-decal-dots-pos-rgb.svg'
@@ -64,12 +64,11 @@ async function insertLetterboxdScore() {
       lbxLogoElement.alt = 'Letterboxd Logo';
       lbxLogoElement.width = 24;
       lbxLogoElement.height = 24;
-      lbxLogoElement.className = 'ipc-icon ipc-icon--letterboxd';
 
       lbxLogoWrapper.appendChild(lbxLogoElement);
 
       const lbxScoreElement = document.createElement('div');
-      lbxScoreElement.className = 'sc-eb51e184-0 ghvwpw';
+      lbxScoreElement.className = 'lbxScoreElement';
 
       const letterboxdScore = await fetchLetterboxdScore(imdbId);
       if (letterboxdScore) {

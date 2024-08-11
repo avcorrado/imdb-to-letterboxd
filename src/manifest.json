@@ -9,8 +9,9 @@
   "permissions": ["activeTab", "tabs", "https://letterboxd.com/*"],
   "content_scripts": [
     {
-      "matches": ["*://www.imdb.com/title/*"],
-      "js": ["contentScript.js"]
+      "matches": ["*://www.imdb.com/title/*", "*://web.archive.org/*"],
+      "js": ["contentScript.js"],
+      "css": ["styles.css"]
     }
   ],
   "browser_specific_settings": {
