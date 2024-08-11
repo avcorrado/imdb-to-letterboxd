@@ -50,13 +50,13 @@ async function insertLetterboxdScore() {
       );
 
       const lbxRatingTextWrapper = document.createElement('span');
-      lbxRatingTextWrapper.className = 'lbxRatingTextWrapper';
+      lbxRatingTextWrapper.className = 'lbx-rating-text-wrapper';
 
       const lbxRatingInnerWrapper = document.createElement('div');
-      lbxRatingInnerWrapper.className = 'lbxRatingInnerWrapper';
+      lbxRatingInnerWrapper.className = 'lbx-rating-inner-wrapper';
 
       const lbxLogoWrapper = document.createElement('div');
-      lbxLogoWrapper.className = 'lbxLogoWrapper';
+      lbxLogoWrapper.className = 'lbx-logo-wrapper';
       const lbxLogoElement = document.createElement('img');
       lbxLogoElement.src = browser.runtime.getURL(
         'icons/letterboxd-decal-dots-pos-rgb.svg'
@@ -68,14 +68,14 @@ async function insertLetterboxdScore() {
       lbxLogoWrapper.appendChild(lbxLogoElement);
 
       const lbxScoreElement = document.createElement('div');
-      lbxScoreElement.className = 'lbxScoreElement';
+      lbxScoreElement.className = 'lbx-score-element';
 
       const letterboxdScore = await fetchLetterboxdScore(imdbId);
       if (letterboxdScore) {
-        lbxScoreElement.innerHTML = `<div class="sc-eb51e184-2 fAhXAe"><span class="sc-eb51e184-1 ljxVSS">${letterboxdScore}</span><span>/5</span></div><div class="sc-eb51e184-5 gDGqZp"></div>`;
+        lbxScoreElement.innerHTML = `<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">${letterboxdScore}</span><span>/5</span></div><div class="gDGqZp"></div>`;
       } else {
         lbxScoreElement.innerHTML =
-          '<div class="sc-eb51e184-2 fAhXAe"><span class="sc-eb51e184-1 ljxVSS">N/A</span><span>/5</span></div><div class="sc-eb51e184-5 gDGqZp"></div><div class="sc-eb51e184-3 kgbSIj">N/A</div>';
+          '<div class="lbx-score-inner-element"><span class="lbx-score-inner-element-span">N/A</span><span>/5</span></div><div class="gDGqZp"></div><div class="kgbSIj">N/A</div>';
       }
 
       lbxRatingInnerWrapper.appendChild(lbxLogoWrapper);
