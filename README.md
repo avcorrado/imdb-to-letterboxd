@@ -1,5 +1,7 @@
 # IMDb to Letterboxd Rating Extension
 
+<img src="./src/icons/letterboxd-decal-dots-pos-rgb.svg" alt="Letterboxd Icon" width="50" height="50">
+
 This Firefox extension enhances the IMDb experience by scraping the Letterboxd rating for movies and displaying it directly on IMDb movie pages. In addition, it provides a button that redirects users to the corresponding Letterboxd page for the selected movie.
 
 ## Features
